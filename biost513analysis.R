@@ -16,3 +16,6 @@ data <- data[complete.cases(data[ , c('hospvs')]), ]
 
 summary(data$hospvs)
 
+#example model with exposure recoded 
+model <- glm(hospvs ~ relevel(factor(calltmcat), ref = "5") + age + sexp + bgcs1, data = dat, family = "binomial")
+summary(model)
