@@ -1,7 +1,7 @@
 #BIOST 513 Data Analysis Project
 #May 21, 2022 
 
-#setwd("~/Desktop/biost513/data")
+# setwd("~/Desktop/biost513/data")
 # data <- read.csv("~/Desktop/biost513/data/dataproject2022.csv")
 
 #setwd("/Users/NicoleBriggs 1/Documents/MPH Coursework/SpringQ2022/biost513/biost513final/") #nicole
@@ -16,6 +16,15 @@ data <- data[complete.cases(data[ , c('hospvs')]), ]
 
 summary(data$hospvs)
 
-#example model with exposure recoded 
-model <- glm(hospvs ~ relevel(factor(calltmcat), ref = "5") + age + sexp + bgcs1, data = dat, family = "binomial")
+# model with exposure recoded 
+model <- glm(hospvs ~ relevel(factor(calltmcat), ref = "0") * relevel(factor(randgrp), ref = "2") + age + sexp + shock, data = data, family = "binomial")
 summary(model)
+coef(summary(model))
+exp(coef(model))
+exp(confint.default(model))
+
+# determining missingness
+sum(!is.na(dat$hospvs) & !is.na(dat$calltmcat) & !is.na(dat$age) & !is.na(dat$sexp) & !is.na(dat$shock) & !is.na(dat$randgrp)) # 1241
+
+
+
