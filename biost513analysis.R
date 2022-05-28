@@ -16,15 +16,15 @@ data <- data[complete.cases(data[ , c('hospvs')]), ]
 
 summary(data$hospvs)
 
+# determining missingness
+sum(!is.na(dat$hospvs) & !is.na(dat$calltmcat) & !is.na(dat$age) & !is.na(dat$sexp) & !is.na(dat$shock)) # 1241
+
 # model with exposure recoded 
-model <- glm(hospvs ~ relevel(factor(calltmcat), ref = "0") * relevel(factor(randgrp), ref = "2") + age + sexp + shock, data = data, family = "binomial")
+model <- glm(hospvs ~ relevel(factor(calltmcat), ref = "0") + age + sexp + shock, data = data, family = "binomial")
 summary(model)
 coef(summary(model))
 exp(coef(model))
 exp(confint.default(model))
-
-# determining missingness
-sum(!is.na(dat$hospvs) & !is.na(dat$calltmcat) & !is.na(dat$age) & !is.na(dat$sexp) & !is.na(dat$shock) & !is.na(dat$randgrp)) # 1241
 
 
 
