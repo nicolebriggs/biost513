@@ -20,10 +20,10 @@ data$alive[data$hospvs==1] <- 0
 View(data)
 
 # determining missingness
-sum(!is.na(dat$hospvs) & !is.na(dat$calltmcat) & !is.na(dat$age) & !is.na(dat$sexp) & !is.na(dat$shock)) # 1241
+sum(!is.na(data$alive) & !is.na(data$calltmcat) & !is.na(data$age) & !is.na(data$sexp) & !is.na(data$shock)) # 1241
 
 # model with exposure recoded 
-model <- glm(hospvs ~ relevel(factor(calltmcat), ref = "0") + age + sexp + shock, data = data, family = "binomial")
+model <- glm(alive ~ relevel(factor(calltmcat), ref = "0") + age + sexp + shock, data = data, family = "binomial")
 summary(model)
 coef(summary(model))
 exp(coef(model))
