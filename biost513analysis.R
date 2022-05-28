@@ -26,5 +26,9 @@ coef(summary(model))
 exp(coef(model))
 exp(confint.default(model))
 
-
+## overall association 
+#nested model
+nestedmodel <- glm(alive ~ age + sexp +shock, data = data, subset= !is.na(data$calltmcat), family ="binomial")
+#likelihood ratio test
+anova(model, nestedmodel, test = "LRT")
 
