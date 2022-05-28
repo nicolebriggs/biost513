@@ -12,9 +12,6 @@ data <- read.csv(paste0(dataDir, "dataproject2022.csv"))
 summary(data$hospvs)
 summary(data$calltmcat)
 
-data <- data[complete.cases(data[ , c('hospvs')]), ]
-summary(data$hospvs)
-
 data$alive[data$hospvs==0] <- 1
 data$alive[data$hospvs==1] <- 0
 View(data)
