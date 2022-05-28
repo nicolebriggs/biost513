@@ -13,8 +13,11 @@ summary(data$hospvs)
 summary(data$calltmcat)
 
 data <- data[complete.cases(data[ , c('hospvs')]), ]
-
 summary(data$hospvs)
+
+data$alive[data$hospvs==0] <- 1
+data$alive[data$hospvs==1] <- 0
+View(data)
 
 # determining missingness
 sum(!is.na(dat$hospvs) & !is.na(dat$calltmcat) & !is.na(dat$age) & !is.na(dat$sexp) & !is.na(dat$shock)) # 1241
